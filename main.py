@@ -20,8 +20,12 @@ async def main():
     st.title("CSV Data Analyzer")
     st.write("Upload your CSV file and select columns to analyze")
     
-    # Create sandbox
-    sbx = Sandbox()
+    # Create sandbox with error handling
+    try:
+        sbx = Sandbox()
+    except Exception as e:
+        st.error(f"Failed to create sandbox: {str(e)}")
+        return  # Exit the main function if sandbox creation fails
     
     # Streamlit file uploader
     uploaded_file = st.file_uploader("Upload your CSV file", type="csv")
